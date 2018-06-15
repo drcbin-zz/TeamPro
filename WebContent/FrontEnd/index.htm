@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页 | 驴友网</title>
+<meta name="Keywords" content="驴友网" />
+<meta name="Description" content="旅游社交，在旅途中享受激情与欢乐" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="mobile-agent"
+	content="format=html5; url=http://m.roadqu.com">
+<meta name="baidu-site-verification" content="fGdITGCHHMB5crjs" />
+<link rel="shortcut icon" href="favicon.ico" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="mobile-agent"
+	content="format=html5; url=http://m.roadqu.com">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css"
+	media="all">
+<link rel="stylesheet" href="css/global.css" media="all" />
+<link rel="stylesheet" href="css/boxy,jquery.fancybox-1.3.4.css" />
+<link rel="stylesheet" type="text/css" href="css/cityguide.css" />
+<link rel="stylesheet" type="text/css" href="css/search.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/aboutus.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/youhui.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/huidong.css">
+<link rel="stylesheet" type="text/css" href="css/reg.css"  />
+
+<script type="text/javascript" src="js/jquery-1.4.4.min,LAB.min.js"></script>
+
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="js/addFile.js"></script>
+<script type="text/javascript" src="Myjs/loginCheckJs.js"></script>
+<script type="text/javascript" src="Myjs/user_page_change.js"></script>
+<script type="text/javascript" src="Myjs/loginCookiejs.js"></script>
+<script type="text/javascript" src="Myjs/registerjs.js"></script>
+<script type="text/javascript" src="Myjs/statejs.js"></script>
+<script type="text/javascript" src="Myjs/memeory_list_js.js"></script>
+<script type="text/javascript" src="Myjs/travel_list_js.js"></script>
+<script type="text/javascript" src="Myjs/travel_memoary.js"></script>
+<script type="text/javascript" src="Myjs/detail_userjs.js"></script>
+<script type="text/javascript" src="Myjs/user_updatejs.js"></script>
+
+
+<script type="text/javascript" src="mainjs/index.js"></script>
+<script type="text/javascript" src="mainjs/memory_detail.js"></script>
+<script type="text/javascript" src="mainjs/strategy_detail.js"></script>
+
+<script type="text/javascript" src="Myjs/memoary_list.js"></script>
+<script type="text/javascript" src="Myjs/upload_file.js"></script>
+
+<style type="text/css">
+.form-group {
+	margin: 0 35px;
+}
+
+.form-sex {
+	margin: 15px;
+}
+</style>
+<script type="text/javascript">
+
+	var userjson = '';
+	var c_cityinfo = '';
+</script>
+</head>
+
+<body id="xxx">
+	<span data-detailId="" style="display:none;" id="save-detail-id"></span>
+	<div class="header">
+		<div class="headWrap">
+			<div class="headTop fn-clear">
+				<h1 class="logo">
+					<a href="index.htm" title="驴友网" style="float: left;">驴友网</a>
+				</h1>
+				<h2 class="slogan" title="在旅途中相遇">在旅途中相遇</h2>
+				
+				
+				
+				<div>
+					<ul class="not_login" id= "login-form">
+						<li style="float: right"><a class="btn_reg"
+							data-toggle="modal" data-target="#myRegisterModal">注册</a></li>
+						<li style="float: right"><a id="top-nav-login"
+							class="btn_login" data-toggle="modal" data-target="#myLoginModal">登录</a></li>
+					</ul>
+					
+					<ul id="user-info">
+						<li style="float:right"><a href="#" id="logout">注销</a></li>                                        
+						<li style="float:right"><a href="#">好友申请（0）</a>&nbsp;&nbsp;&nbsp;</li>
+						<li style="float:right"><a href="#">站内信（0）</a>&nbsp;&nbsp;&nbsp;</li>
+						<li style="float:right"><a onclick="addfile('user/user_base.htm');" id="user-info-username"></a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+	                </ul>
+				</div>
+			</div>
+
+
+
+
+			<!-- /* 登录模态框 ---- start*/ -->
+			<div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">用户登录</h4>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputUsername">用户名</label> <input type="text"
+								class="form-control" id="username" placeholder="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">密码</label> <input
+								type="password" class="form-control" id="password"
+								placeholder="password">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-default" id="sure" onclick="return false;">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /* 登录模态框 ---- end*/ -->
+
+			
+			
+			
+			<!--  /* 注册模态框 ---- start*/ -->
+			<div class="modal fade" id="myRegisterModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h2 class="modal-title" id="myModalLabel">欢迎注册驴友网</h2>
+							<span class="checkemailmsg"></span>
+						</div>
+						<form>
+							<div class="form-group">
+								<label for="exampleInputUsername1">用户名：</label> 
+								<a id = "username-error" title = ""></a>
+								<input
+									type="text" class="form-control" id="checkUsername"
+									name="username" placeholder="Username" />
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">密码：</label> 
+								<a id="password-error" title=""></a>
+								<input
+									type="text" class="form-control" id="checkPassword"
+									name="password" placeholder="Password" />
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">确认密码：</label> 
+								<a id = "repassword-error" title="两次密码不同"></a>								
+								<input
+									type="text" class="form-control" id="checkrePassword"
+									name="repassword" placeholder="Password" />
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email</label> 
+								<a id = "email-error" title=""></a>
+								<input
+									type="email" class="form-control" id="checkEmail" name="email"
+									placeholder="Email" />
+							</div>
+							<div class="modal-footer" style="margin: 15px;">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button id="register-submit" type="button"
+									class="btn btn-primary">确定</button>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- /* 注册模态框 ---- end*/ -->
+
+
+
+
+			<ul class="dropdown">
+				<li id="index" class="current"><a
+					onclick="addfile('index/index_memory.html','index');">首页</a></li>
+				<li id="memory"><a
+					onclick="addfile('memory/memory.htm','memory');">旅游记忆</a></li>
+				<li id="traveller"><a
+					onclick="addfile('traveller/traveller.htm','traveller');">结伴游</a></li>
+				<li id="strategy"><a
+					onclick="addfile('strategy/strategy.htm','strategy');">景点攻略</a></li>
+			</ul>
+			<div class="navSearch">
+				<form action="memory/memory_search.htm" method="get" id="searchForm"
+					target="_blank">
+					<input name="k" type="text" class="top-search-input" id="searchKey"
+						value="搜索旅游记忆" maxlength="50" autocomplete="off" /> <input
+						name="" type="submit" value="搜索" class="search_btn" />
+				</form>
+				<div id="keyword_tip_content"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!--main body-->
+	<div id="content"></div>
+	<!--main body end-->
+
+
+
+
+
+
+	<div class="footer ">
+		<div class="footerWrap fn-clear">
+			<ul class="about_roadqu ">
+				<li><a href="#">关于驴友</a>|</li>
+				<li><a href="#">联系我们</a>|</li>
+				<li><a href="#">用户公约</a>|</li>
+				<li><a href="#">意见反馈</a>|</li>
+				<li><a href="#">帮助中心</a>|</li>
+				<li><a href="#">友情链接</a></li>
+			</ul>
+			<div class="foot">
+				<p>
+					<span>版权所有软件1001班 <a href="#">陈文平</a><a href="#"> 胡剑彬</a><a
+						href="#">林清华</a><a href="#">汤怡青</a><a href="#">袁泽</a><a href="#">周晓丽</a>
+					</span>
+				</p>
+				<div class="sns">
+					
+					<!-- WPA Button Begin -->
+					<!-- WPA Button END -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer end -->
+
+
+	<a href="#map_picker_content" id="mappickerfancybox" class="disnone">更改</a>
+	<div class="disnone" id="map_picker_wrap">
+		<div id="map_picker_content"></div>
+	</div>
+
+	<!-- STUFF YOU NEED FOR BEAUTYTIPS -->
+	<!--[if IE]>
+<script src="/static/js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
+	<!-- /STUFF -->
+	<!--  -->
+
+	<!-- 图片加载透明文字开始 -->
+	<script type="text/javascript" id="bdshare_js"
+		data="type=tools&amp;mini=1&amp;uid=718154"></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+		var bds_config = {
+			'bdText' : '我正在光临驴友网，精选的线路行程、旅游圈、专题和游记攻略，还有特色景点、住宿、美食、购物和交通服务等，可查看游玩地图，还能下载城市旅游攻略。（分享自路趣网）',
+			'bdPic' : 'http://www.roadqu.com/images/intro_201301102119_-1.jpg'
+		};
+		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion="
+				+ new Date().getHours();
+	</script>
+	<script type="text/javascript">
+
+
+ 
+		$(document).ready(function() {
+			
+			
+			addfile('index/index_memory.html', 'index');
+			// 幻灯片
+			$("#poi_hot li,#wanfa_pic li:first").hover(function() {
+				var $this = $(this);
+				$this.find('div.intro_info').show();
+
+
+			}, function() {
+				var $this = $(this);
+				$this.find('div.intro_info').hide();
+
+			})
+			$LAB.script("js/jquery.bxSlider.min.js").wait(function() {
+				$('#slider').bxSlider({
+					auto : true,
+					pager : true
+				});
+				$('#link-list').bxSlider({
+					speed : 1000
+				});
+			})
+			$("#guide_nav li").hover(function() {
+				var $this = $(this);
+				$this.addClass("guide_nav_item_hover");
+
+			}, function() {
+				var $this = $(this);
+				$this.removeClass("guide_nav_item_hover");
+
+			})
+
+			//youhui pop
+
+			var isInDiscountCard = false;
+
+			$("#youhui-hot>li").bt({
+				fill : '#FFFFFF',
+				strokeStyle : '#BFBFA8',
+				cornerRadius : 5,
+				padding : 20,
+				width : 285,
+				spikeLength : 10,
+				spikeGirth : 10,
+				ajaxPath : [ "$(this).attr('data-href')" ],
+				closeWhenOthersOpen : true,
+
+				hideTip : function(box, callback) {
+					if (!isInDiscountCard) {
+						$(box).hide();
+
+						callback();
+					}
+				},
+				hoverIntentOpts : {
+					interval : 300,
+					timeout : 1000
+				}
+
+			});
+
+			$('#pop-discount').live('mouseenter', function() {
+
+				isInDiscountCard = true;
+			});
+
+			$('#pop-discount').live('mouseleave', function() {
+
+				isInDiscountCard = false;
+				$("#container").trigger('click');
+			});
+
+		});
+	</script>
+	<!-- 图片加载透明文字结束 -->
+</body>
+</html>

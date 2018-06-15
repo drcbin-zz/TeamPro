@@ -1,0 +1,84 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<div id="container">
+	<div id="mainWrapper" class="cf"> 
+		<!-- 主题游 begin -->  
+		<div class="ui-box fn-clear">
+			<div class="ui-title">
+				<h2 class="ui-title-cnt fn-left"><em>主题游</em></h2>    
+			</div>
+			
+			<ul class="hot-spots fn-clear" id = "spot_list" >
+				<li id = "spot_temp" style="display: none;">
+					<a id = "spot_sub"><img id="spot_img" src="images/scene_201301102122_0.jpg" width="190" height="190" alt="梧桐山" title="梧桐山"></a>
+					<p></p>
+					<ul class="tag-info fn-clear">
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id="spot_name">梧桐山</a></li>
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id="spot_time">春天</a></li>
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id="spot_peo">老少皆宜</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- 主题游 end -->  
+		
+		<div class="ui-box fn-clear">
+			<div class="ui-title">
+				<h2 class="ui-title-cnt fn-left"><em>时令游</em></h2>    
+			</div>
+			
+			<ul class="hot-spots fn-clear" id = "spot_list2">
+				<li class="middle" id = "spot_temp2" style="display: none;">
+					<a id="spot_sub2"> <img id = "spot_img2" src="images/scene_201301102122_0.jpg" width="190" height="190" alt="梧桐山" title="梧桐山"></a>
+					<ul class="tag-info fn-clear">
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id = "spot_name2">梧桐山</a></li>
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id = "spot_time2">春天</a></li>
+						<li><a onclick="addfile('strategy/strategy_detail.htm');" target="_blank" id = "spot_peo2">老少皆宜</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+		<script>
+			var spot_list_a = function(){
+				$.post("/TeamPro/web/spot/list",{count:4},function(data){
+					if(data.STATUS=="SUCCESS"){
+						
+						for(var objects of data.object){
+						var action = $("#spot_temp").clone().removeAttr("id style");
+						action.find("#spot_img").removeAttr("id").attr("src",objects.image_path);
+						action.find("#spot_name").removeAttr("id").html(objects.spot_name);
+						action.find("#spot_sub")
+						.removeAttr("id")
+						.attr("onclick",'addfile("strategy/strategy_detail.htm",null,' +objects.id + ')');
+
+						action.find("#spot_time").removeAttr("id").html(objects.suit_time);
+						action.find("#spot_peo").removeAttr("id").html(objects.suit_people);
+						$("#spot_list").append(action);
+						}
+					}
+				},"json")
+				$.post("/TeamPro/web/spot/list",{count:4,page:2},function(data){
+					if(data.STATUS=="SUCCESS"){
+						
+						for(var objects of data.object){
+						var action = $("#spot_temp2").clone().removeAttr("id style");
+						action.find("#spot_img2").removeAttr("id").attr("src",objects.image_path);
+						action.find("#spot_name2").removeAttr("id").html(objects.spot_name);
+						action.find("#spot_time2").removeAttr("id").html(objects.suit_time);
+						action.find("#spot_sub2")
+						.removeAttr("id")
+						.attr("onclick",'addfile("strategy/strategy_detail.htm",null,' +objects.id + ')');
+						action.find("#spot_peo2").removeAttr("id").html(objects.suit_people);
+						$("#spot_list2").append(action);
+						}
+					}
+				},"json")
+			}
+			
+			spot_list_a();
+		</script>

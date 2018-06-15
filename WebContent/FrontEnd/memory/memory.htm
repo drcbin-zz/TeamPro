@@ -1,0 +1,48 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<!--main body-->
+<div id="container">
+
+    <!-- type container -->
+    
+	<li id="memoary-item-template" style="display:none;">
+           <a onclick="addfile('memory/memory_detail.htm');">
+               <img id="image"  alt=""
+               width="221" height="300">
+           </a>
+           <p class="alpha-txt alpha-txt-green">
+               <a id="title" ></a>
+           </p>
+           <div class="alpha-txt intro_info">
+               <p id="content">惠州罗浮山风景区是春天爬山、泡温泉休闲好去处。</p>
+           </div>
+     </li>
+     
+    <div id="container-template" style="display:none;">
+       <div class="ui-title">
+            <h2 class="ui-title-cnt fn-left">
+                <em id="type_title" >面朝大海</em>
+            </h2>
+            <div class="ui-title-subcnt fn-right">
+                <a target="_blank" onclick="addfile('memory/memory_list.htm');">+更多</a>
+            </div>
+        </div>
+
+        <ul class="poi_hot" id="memoary-item-container">
+
+        </ul>
+     </div>
+        
+        
+    <div id="memoary-container" class="ui-box fn-clear">   
+     
+    </div>
+    
+</div>
+<!--户外撒野- end-->
+<!--main body end-->
+<script type="text/javascript">
+	get_memorys();
+</script>

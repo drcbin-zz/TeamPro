@@ -1,0 +1,86 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<div id="container">
+
+    <div class="ui-box fn-clear ">
+        <div class="city-guide">
+            <div class="fn-left">
+				<a href="#" id="title-ctime">【2013年7月1日-2013年7月5日】苏州行</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发帖时间：2013年3月24日
+            </div>
+		 </div>
+		 
+        <!-- 发帖人 -->
+        <div class="tag-list menu_select cf">
+        	<span class="tag-notes fn-left">发帖人：</span>
+            <span class="tag-cnt fn-right" id="lyq"><a title="禾木" href="#" data-lyq="0" id="auto_peo">禾木</a></span>
+        </div>
+         <!--end 发帖人 -->
+		 
+		 <!-- 目的地 -->
+        <div class="tag-list menu_select cf">
+        	<span class="tag-notes fn-left">目的地：</span>
+            <span class="tag-cnt fn-right" id="lyq"><a title="苏州" href="#" class="tag-current" data-lyq="0" id="x_del">苏州</a></span>
+        </div>
+         <!--end 目的地 -->
+		 
+		  <!-- 行程安排 -->
+        <div class="tag-list menu_select cf">
+        	<span class="tag-notes fn-left">行程安排：</span>
+            <span class="tag-cnt fn-right" id="lyq"><a href="#" data-lyq="0" id="from_time_a">2013年7月1日</a> <a href="#">至</a> <a href="#" data-lyq="0" id="totime_a">2013年7月5日</a></span>
+        </div>
+         <!--end 行程安排 -->
+		 
+		 <!-- 联系方式 -->
+        <div class="tag-list menu_select cf">
+        	<span class="tag-notes fn-left">联系方式：</span>
+            <span class="tag-cnt fn-right" id="tel_a"><a href="#" class="tag-current" data-lyq="0">15201345955</a></span>
+        </div>
+         <!--end 联系方式 -->
+		 
+		 <!-- 帖子详情 -->
+        <div class="tag-list menu_select cf">
+        	<span class="tag-notes fn-left">详情：</span>
+            <span class="tag-cnt fn-right" id="lyq_t"></span>
+        </div>
+         <!--end 帖子详情 -->
+    </div>
+
+
+</div>
+
+  	<script>
+			var getData = function(){
+				
+				$.post("/TeamPro/web/friends_travel/"+ $('#save-detail-id').data('detailid') +"/detail",{},
+						function(data){
+						if(data.STATUS=="SUCCESS"){
+							var fridata = data.object;
+							$("#title-ctime").html(fridata.title+
+							"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发帖时间："+fridata.createTime);
+							$("#auto_peo").html(fridata.userId);
+							$("#x_del").html(fridata.destination);
+							$("#from_time_a").html(fridata.fromTime);
+							$("#totime_a").html(fridata.toTime);
+							$("#lyq_t").html(fridata.content);
+							$.post("/TeamPro/web/user/"+ fridata.userId +"/detail",{},function(Data){
+								if(Data.STATUS=="SUCCESS"){
+									$("#auto_peo").html(Data.object.name);
+									$("#tel_a").html(Data.object.phone);
+									
+								}
+							},"json");
+							
+							
+						}
+				},"json");
+			}
+			getData();
+
+		</script>
+
+
+
+		

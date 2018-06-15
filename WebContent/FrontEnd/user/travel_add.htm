@@ -1,0 +1,46 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+        
+			<h2 style="width:680px; height:40px; line-height:41px; background:#83bb4a url(images/reg-title-bg.png) repeat-x; 
+						color:#fefefe; text-indent:25px; font-size:20px; font-family:\9ED1\4F53; font-weight:400;">发起旅游</h2>
+			<form id="form100" action="login.htm" method="post" class="reg-form" >
+				<p><label for="title"><em>*</em>标题：</label>
+                   <input name="title" type="text"  class="input-txt" id="travel_title" autocomplete="off" size="43" />
+                </p>
+                <p><label for="stat_time"><em>*</em>目的地：</label>
+                   <input type="text" id="destination" class="input-txt" autocomplete="off" size="43" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+                </p>
+				<p><label for="stat_time"><em>*</em>起始日期：</label>
+                   <input type="text" id="stat_time" class="input-txt" autocomplete="off" size="43" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+                </p>
+				<p><label for="back_time"><em>*</em>返回日期：</label>
+                   <input type="text" id="back_time"class="input-txt" autocomplete="off" size="43" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+                </p>
+				<p><label for="content"><em>*</em>内容：</label>
+					<textarea rows="5" cols="60" id="travel_content"  size="43" ></textarea>
+				</p>
+               	<a id="submit_btn" style="margin-top:90px;" href="#" class="reg-login">发布</a>
+			</form>
+			<<script type="text/javascript">
+			user = JSON.parse($.cookie("userstring"));
+				$("#submit_btn").on("click",function(){
+					$.post("/TeamPro/web/friends_travel/insert",
+					{
+						title:$("#travel_title").val(),
+						fromTime:$("#stat_time").val(),
+						toTime:$("#back_time").val(),
+						content:$("#travel_content").val(),
+						temp:$("#destination").val(),
+						userId:user.id,
+						spot_id:"20001"
+					}
+					,function(data){
+						if(data.STATUS=="SUCCESS"){
+							alert("发布成功");
+						}
+					},"json");
+				});
+			</script>
+
+	

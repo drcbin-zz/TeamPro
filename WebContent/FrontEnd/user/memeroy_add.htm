@@ -1,0 +1,49 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+
+        
+			<h2 style="width:680px; height:40px; line-height:41px; background:#83bb4a url(../images/reg-title-bg.png) repeat-x; 
+						color:#fefefe; text-indent:25px; font-size:20px; font-family:\9ED1\4F53; font-weight:400;">发布新记忆</h2>
+
+            <!--发布新记忆begin-->
+			<form id="form100" action="login.htm" method="post" class="reg-form" >
+				<p><label for="title" ><em>*</em>标题：</label>
+                   <input id="memeory_add_title" name="title" type="text"  class="input-txt" id="title" autocomplete="off" size="43" />
+                </p>
+				<p><label for="memeory_type"><em>*</em>记忆类别：</label>
+                   <input name="memeory_type" id="memeory_add_temp" type="text"  class="input-txt" id="memeory_type" autocomplete="off" size="43" />
+                </p>
+				<p><label for="spots_image"><em>*</em>景点图片：</label>
+                   <embed name="image" width="250" height="120" scale="exactfit" src="http://ucenter.8264.com/images/camera.swf?inajax=1&appid=31&input=0897cG7VoeiI86Vp06jxHbg%2FFcTkRVWiJn4wPV1WyYvzDkjULGqqTJlbnDJB%2FOFxB9%2BwQiylSFGfBhFlYU6qFiqoIcZM2wv%2FIVPOWN3ju%2FLuH0XyoSTNPwSIiBofsvOE&agent=f95939cecaed79637c97e29779031c0e&ucapi=ucenter.8264.com&avatartype=virtual&uploadSize=2048" name="mycamera" quality="high" bgcolor="#ffffff" wmode="transparent" menu="false" swliveconnect="true" allowscriptaccess="always" type="application/x-shockwave-flash"/>
+                </p>
+				<p></p>
+				<p><label for="content"><em>*</em>内容：</label>
+					<textarea rows="5" cols="60"  size="43" id="memeory_add_content"></textarea>
+				</p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+               	<a style="margin-top:50px;" href="#" class="reg-login" id = "memeory_add_submit">发布</a>
+			</form>
+            <!--发布新记忆begin-->
+            <script>
+            	$("#memeory_add_submit").on("click",function(){
+            		
+            		$.post("/TeamPro/web/travel_memoary/insert",
+            		{
+            			title:$("#memeory_add_title").val(),
+            			type_name:$("#memeory_add_temp").val(),
+            			content:$("#memeory_add_content").val(),
+            			
+            			authId:JSON.parse($.cookie("userstring")).id
+            		}
+            		,function(data){
+            			if(data.STATUS=="SUCCESS"){
+            				alert("发布成功");
+            				
+            			}
+            		},"json");
+            		
+            	});
+            
+            </script>
+            
+            

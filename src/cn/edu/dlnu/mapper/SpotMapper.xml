@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.dlnu.daos.SpotMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.dlnu.models.Spot" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="model_type" property="modelType" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="spot_name" property="spotName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="suit_pople" property="suitPople" jdbcType="VARCHAR" />
+    <result column="suit_time" property="suitTime" jdbcType="VARCHAR" />
+    <result column="need_thing" property="needThing" jdbcType="VARCHAR" />
+    <result column="attentions" property="attentions" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="temp" property="temp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, status, model_type, content, spot_name, type, city, suit_pople, suit_time, need_thing, 
+    attentions, detail, like_count, temp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from spots
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from spots
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.dlnu.models.Spot" >
+    insert into spots (id, status, model_type, 
+      content, spot_name, type, 
+      city, suit_pople, suit_time, 
+      need_thing, attentions, detail, 
+      like_count, temp)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{spotName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{city,jdbcType=INTEGER}, #{suitPople,jdbcType=VARCHAR}, #{suitTime,jdbcType=VARCHAR}, 
+      #{needThing,jdbcType=VARCHAR}, #{attentions,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{likeCount,jdbcType=INTEGER}, #{temp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.dlnu.models.Spot" >
+    insert into spots
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modelType != null" >
+        model_type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="spotName != null" >
+        spot_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="suitPople != null" >
+        suit_pople,
+      </if>
+      <if test="suitTime != null" >
+        suit_time,
+      </if>
+      <if test="needThing != null" >
+        need_thing,
+      </if>
+      <if test="attentions != null" >
+        attentions,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+      <if test="temp != null" >
+        temp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modelType != null" >
+        #{modelType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="spotName != null" >
+        #{spotName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="suitPople != null" >
+        #{suitPople,jdbcType=VARCHAR},
+      </if>
+      <if test="suitTime != null" >
+        #{suitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="needThing != null" >
+        #{needThing,jdbcType=VARCHAR},
+      </if>
+      <if test="attentions != null" >
+        #{attentions,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="temp != null" >
+        #{temp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.dlnu.models.Spot" >
+    update spots
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="spotName != null" >
+        spot_name = #{spotName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="suitPople != null" >
+        suit_pople = #{suitPople,jdbcType=VARCHAR},
+      </if>
+      <if test="suitTime != null" >
+        suit_time = #{suitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="needThing != null" >
+        need_thing = #{needThing,jdbcType=VARCHAR},
+      </if>
+      <if test="attentions != null" >
+        attentions = #{attentions,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.dlnu.models.Spot" >
+    update spots
+    set status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      spot_name = #{spotName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER},
+      suit_pople = #{suitPople,jdbcType=VARCHAR},
+      suit_time = #{suitTime,jdbcType=VARCHAR},
+      need_thing = #{needThing,jdbcType=VARCHAR},
+      attentions = #{attentions,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from spots
+    where status=1
+     LIMIT #{start},#{end}
+  </select>
+  <update id="delete" parameterType="cn.edu.dlnu.models.Spot" >
+    update spots
+    set status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      spot_name = #{spotName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER},
+      suit_pople = #{suitPople,jdbcType=VARCHAR},
+      suit_time = #{suitTime,jdbcType=VARCHAR},
+      need_thing = #{needThing,jdbcType=VARCHAR},
+      attentions = #{attentions,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

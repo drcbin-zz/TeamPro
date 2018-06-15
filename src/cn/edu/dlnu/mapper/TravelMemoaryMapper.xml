@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.dlnu.daos.TravelMemoaryMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.dlnu.models.TravelMemoary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="model_type" property="modelType" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="auth_id" property="authId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="temp" property="temp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, status, model_type, title, auth_id, content, cdate, image_path, like_count, temp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from memoary_travel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from memoary_travel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.dlnu.models.TravelMemoary" >
+    insert into memoary_travel (id, status, model_type, 
+      title, auth_id, content, 
+      cdate, image_path, like_count, 
+      temp)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{authId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{imagePath,jdbcType=VARCHAR}, #{likeCount,jdbcType=INTEGER}, 
+      #{temp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.dlnu.models.TravelMemoary" >
+    insert into memoary_travel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modelType != null" >
+        model_type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="authId != null" >
+        auth_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="imagePath != null" >
+        image_path,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+      <if test="temp != null" >
+        temp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modelType != null" >
+        #{modelType,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="authId != null" >
+        #{authId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="temp != null" >
+        #{temp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.dlnu.models.TravelMemoary" >
+    update memoary_travel
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="authId != null" >
+        auth_id = #{authId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.dlnu.models.TravelMemoary" >
+    update memoary_travel
+    set status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      auth_id = #{authId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByAuthId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from memoary_travel  
+    where auth_id = #{auth_id,jdbcType=INTEGER} and status=1 LIMIT #{start},#{end}
+    
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from memoary_travel
+    where status=1
+     LIMIT #{start},#{end}
+  </select>
+  
+   <update id="delete" parameterType="cn.edu.dlnu.models.TravelMemoary" >
+    update memoary_travel
+    set status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      auth_id = #{authId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

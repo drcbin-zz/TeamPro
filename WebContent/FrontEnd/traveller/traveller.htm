@@ -1,0 +1,142 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<div id="container">
+	<div class="mainWrap cf">
+		<div class="search-box">
+			<div class="search-body">
+				<ul class="search-tab">
+					<li class="select"><a href="#">目的地</a></li>
+					<li><a href="#">时间</a></li>
+				</ul>
+				<form method="get" action="#" id="f1"
+					class="search-form">
+					<input type="text" id="k2_temp" name="k" class=" input-search" value=""
+						autocomplete="off"> <input type="button"
+						class="search-btn" value="搜索" id = "form_sub" onclick="return false;">
+				</form>
+			</div>
+		</div>
+
+		<div class="ui-box cf">
+			<div class="ui-title">
+				<h2 class="ui-title-cnt fn-left">
+					<em>最新发布</em> (3858篇帖子)
+				</h2>
+			</div>
+			<ul class=" travel-log-list gonglue-list" id = "traveller_fri_list">
+				
+				<li  style="display:none;" id="traveller_fri_temp" class = "temp_out">
+				<a target="_blank" href="#" class="gonglue_img fn-left" >
+						<img src="images/3aedfe2ee2f96e8778c5a61176f0d6ed_c.jpg"
+						alt="【2013年7月1日-2013年7月5日】苏州行" width="130" height="130" />
+				</a>
+					<div class="gonglue_info fn-left">
+						<h3>
+							<a  target="_blank"  
+								id="traveller_fri_title">【2013年7月1日-2013年7月5日】苏州行</a>
+						</h3>
+						<p id="traveller_fri_del">&nbsp;&nbsp;目的地：苏州</p>
+						<p id="traveller_fri_time">&nbsp;&nbsp;行程：2013年7月1日 至 2013年7月5日</p>
+						<p id="traveller_fri_auto">
+							&nbsp;&nbsp;发布者: &nbsp;&nbsp;&nbsp;&nbsp;发布时间：2013-03-15
+							16:51:22
+						</p>
+					</div></li>
+				
+			</ul>
+			<div class="ui-title-subcnt fn-right">
+				<a target="_blank" href="#">+查看更多</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+			<script>
+			    var traveller =	function(x){
+					$.post("/TeamPro/web/friends_travel/list",{count:10,page:x},function(data){
+						if(data.STATUS=="SUCCESS"){
+							var datas = data.object;
+							for(var temp of datas){
+								var action = $("#traveller_fri_temp").clone().removeAttr("id style");
+								action.find("#traveller_fri_title").removeAttr("id style")								
+								.attr("onclick", 
+										"addfile('traveller/traveller_detail.htm', null, " + temp.id + ");"
+									)
+								.html(temp.title);
+								action.find("#traveller_fri_del").removeAttr("id style").html(temp.destination);
+								action.find("#traveller_fri_time").removeAttr("id style").html(temp.fromTime+"至"+temp.toTime);
+								action.find("#traveller_fri_auto").removeAttr("id style").html(temp.userId+"&nbsp;&nbsp;&nbsp;&nbsp发布时间："+temp.createTime);
+								action.find("#traveller_fri_title")
+								$("#traveller_fri_list").append(action);
+							}
+						}
+					},"json");
+				}
+				
+			   
+			    	 traveller(1);
+			    	 var ll = 2;
+			    	 			        	
+			    	$("#container").on("mousewheel",function(){
+			    		
+			    		st = $(document).scrollTop();
+			    		wh = $(window).height();
+			    		viewH = $(document).height()//可见高度  
+		                contentH = $("#xxx").scrollHeight//内容高度  
+		                scrollTop = $("body")[0].scrollTop;//滚动高度  
+		                //if(contentH - viewH - scrollTop <= 100) { //到达底部100px时,加载新内容  
+		                if ((st +wh)/ viewH >= 0.95) { //到达底部100px时,加载新内容  
+		                	
+		                	traveller(ll);
+		                	
+		                	ll = ll+1;
+		                	console.info(ll);
+		                }  
+			    	});  
+
+			
+			</script>
+			
+			<script>
+				$("#form_sub").on("click",function(){
+					$.post("/TeamPro/web/friends_travel/list",{count:10000},function(data){
+						if(data.STATUS=="SUCCESS"){
+							$("#traveller_fri_temp").removeAttr("class");
+							$(".temp_out").remove();
+							$("#traveller_fri_temp").attr("class","temp_out");
+							if(data.object!=null){
+							var datas = data.object;
+							
+							for(var temp of datas){
+								if(temp.destination.indexOf($("#k2_temp").val())!=-1){
+								var action = $("#traveller_fri_temp").clone().removeAttr("id style");
+								action.find("#traveller_fri_title").removeAttr("id style")								
+								.attr("onclick", 
+										"addfile('traveller/traveller_detail.htm', null, " + temp.id + ");"
+									)
+								.html(temp.title);
+								action.find("#traveller_fri_del").removeAttr("id style").html(temp.destination);
+								action.find("#traveller_fri_time").removeAttr("id style").html(temp.fromTime+"至"+temp.toTime);
+								action.find("#traveller_fri_auto").removeAttr("id style").html(temp.userId+"&nbsp;&nbsp;&nbsp;&nbsp发布时间："+temp.createTime);
+								action.find("#traveller_fri_title")
+								$("#traveller_fri_list").append(action);
+								}
+							}
+							}else{
+							}
+						}
+					},"json");
+				});
+			
+			
+			
+			</script>
+			<script>
+			
+			
+			
+			
+			</script>
+			

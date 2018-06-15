@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.dlnu.daos.FriendMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.dlnu.models.Friend" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="from" property="from" jdbcType="INTEGER" />
+    <result column="to" property="to" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, from, to, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from friends
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.dlnu.models.Friend" >
+    insert into friends 
+    (`from`, `to`, `create_time`)
+    values 
+    (#{from,jdbcType=INTEGER}, #{to,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.dlnu.models.Friend" >
+    insert into friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="from != null" >
+        `from`,
+      </if>
+      <if test="to != null" >
+        `to`,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="from != null" >
+        #{from,jdbcType=INTEGER},
+      </if>
+      <if test="to != null" >
+        #{to,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.dlnu.models.Friend" >
+    update friends
+    <set >
+      <if test="from != null" >
+        from = #{from,jdbcType=INTEGER},
+      </if>
+      <if test="to != null" >
+        to = #{to,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.dlnu.models.Friend" >
+    update friends
+    set from = #{from,jdbcType=INTEGER},
+      to = #{to,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends
+    LIMIT #{start},#{end}
+  </select>
+  
+  <update id="delete" parameterType="cn.edu.dlnu.models.Friend" >
+    update friends
+    set from = #{from,jdbcType=INTEGER},
+      to = #{to,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="friendsList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+	select 
+	`from`, `to`, `create_time`
+	from friends
+	where `from` = #{id}
+	OR `to` = #{id}
+  </select> 
+</mapper>

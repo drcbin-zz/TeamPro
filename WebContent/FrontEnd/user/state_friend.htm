@@ -1,0 +1,99 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+
+        
+
+			<h2 style="width:680px; height:40px; line-height:41px; background:#83bb4a url(../images/reg-title-bg.png) repeat-x; 
+						color:#fefefe; text-indent:25px; font-size:20px; font-family:\9ED1\4F53; font-weight:400;">好友动态</h2>
+			<ul id="fri_sta_list" class="comment-list">
+
+                <!--我的动态显示benin-->
+                <li class="fn-clear" style="display: none;" id = "fri_sta_temp">
+                    <div>
+                        <p>
+                            <a id="fri_sta_time" class="comment_user" href="#">发布时间：2013-03-15 16:51:22</a>
+                            <label style="float:right"><a class="comment_user" href="#" id = "fri_state_del_sub">删除</a></label>
+                        </p>
+                        <div class="comment_box">
+                            <div class="comment_cnt" id="fri_sta_content">
+                                苏州，中国华东地区的特大城市之一，首批历史文化名城，中国十大重点风景旅游城市之一。
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!--我的动态显示benin-->
+
+
+			</ul>
+			<!--分页-->
+			<div class="no-pages cf">
+				<strong>1</strong> <a href="?page=2&#comment">2</a>  <a href="?page=3&#comment">3</a> <a href="?page=4&#comment">4</a><a href="?page=2&#comment" class="pageBtn">下一页 &gt;&gt;</a>				
+			</div>
+			
+			
+			<script>
+			var fri_load_actions = function(x){
+			
+				user = JSON.parse($.cookie("userstring"));
+				$.post("/TeamPro/web/"+ user.id+"/friend/list",{},function(data2){
+					if(data2.STATUS=="SUCCESS"){
+						for(var temp2 of data2.object){
+							$.post(
+									"/TeamPro/web/user/"+ temp2.name+ "/travel_memoary/all",
+									{
+
+									},
+									function(data){
+										if(data.STATUS == "SUCCESS"){
+											
+											for(var temp of data.objects){
+												
+												var action = $("#fri_sta_temp").clone().removeAttr("id style");
+												action.find("#fri_sta_time").removeAttr("id").html(temp.createTime+"&nbsp;&nbsp;&nbsp;&nbsp;"+temp.authId);
+												action.find("#fri_sta_content").removeAttr("id").html(temp.content);
+												var id = temp.id;
+												(function(n){
+													action.find("#fri_state_del_sub").removeAttr("id").on("click",function(){
+														if(confirm("是否确认删除?")){
+															
+																$.post("/TeamPro/web/travelmemoary/"+n+"/delete",{},
+																		function(data){
+																			if(data.STATUS=="SUCCESS"){
+																				alert("删除成功");
+																				action.remove();
+																			}
+																},"json");
+														
+															
+														}
+													});
+													
+												})(id);
+												
+											
+												// alert("dd");
+												var a = $("#" + action_container_id);
+												
+												$("#fri_sta_list").append(action);
+											}
+											
+
+										}
+									});
+						}
+					}
+					
+				},"json");
+				
+				
+				
+				
+			};
+				
+			fri_load_actions(1);
+			
+			
+			</script>
+
+	

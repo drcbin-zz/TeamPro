@@ -1,0 +1,85 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+        
+	<script type="text/javascript">
+		
+
+	</script>
+
+			<h2 style="width:680px; height:40px; line-height:41px; background:#83bb4a url(images/reg-title-bg.png) repeat-x; 
+						color:#fefefe; text-indent:25px; font-size:20px; font-family:\9ED1\4F53; font-weight:400;">好友列表</h2>
+			<ul id="friend-list" class="comment-list" >
+				<li class="fn-clear">
+					<div class="isearch">
+						 <div class="navSearch">
+							<form action="friend_search.htm" method="get" id="search" target="_blank">
+								<input name="k" type="text" class="top-search-input" id="searchKeyfriends" value="搜索好友" maxlength="50" autocomplete="off"/>
+								<input name="s" type="submit" value="搜索" class="search_btn">
+							</form>
+							<div id="keyword_tip"></div>
+						</div>
+					</div>
+				</li>
+
+             <!--搜索到的好友显示地点Begin-->
+				<li class="fn-clear" id = "friend_temp" style="display:none;">
+					<div >
+						<p>
+							<a class="comment_user" onclick="addfile('memory/memory_detail.htm');"><img width="75" height="75" alt="i闲逛" src="images/default.jpg">
+								&nbsp;&nbsp;&nbsp;&nbsp;<span id="friend_name">姓名</span> </a>
+							<label style="float:right"><a class="comment_user" href="#">删除</a></label>
+						</p>
+						<div class="comment_box">
+							<div class="comment_cnt">
+								<span id="friend_sex">性别：男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="friend_address">所在地：苏州&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="friend_birthday">生日：2013-03-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="friend_qq">QQ：3958923548&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="friend_tel">手机：135399877898&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</span>
+							</div>
+						</div>
+					</div>
+
+				</li>
+            <!--搜索到的好友显示地点End-->
+			</ul>
+			<!--分页-->
+			<div class="no-pages cf">
+				<strong>1</strong> <a href="?page=2&#comment">2</a>  <a href="?page=3&#comment">3</a> <a href="?page=4&#comment">4</a><a href="?page=2&#comment" class="pageBtn">下一页 &gt;&gt;</a>				
+			</div>	
+			<script>
+			user = JSON.parse($.cookie("userstring"));
+				var getID = function(){
+					$.post("/TeamPro/web/"+ user.id+"/friend/list",{},function(data){
+						if(data.STATUS=="SUCCESS"){
+							var users = data.object;
+							for(var temp of users){
+								$.post("/TeamPro/web/user/"+temp.name+"/detail",{},
+										function(Data){
+										if(Data.STATUS=="SUCCESS"){
+											var friend = Data.object;
+											var action = $("#friend_temp").clone().removeAttr("id style");
+											action.find("#friend_name").removeAttr("id style").html(friend.name);
+											action.find("#friend_address").removeAttr("id style").html(friend.address);
+											action.find("#friend_birthday").removeAttr("id style").html(friend.birthday);
+											action.find("#friend_qq").removeAttr("id style").html(friend.qq);
+											action.find("#friend_tel").removeAttr("id style").html(friend.phone);
+											if(friend.gender==1){
+												action.find("#friend_sex").removeAttr("id style").html("男");
+											}else if(friend.gender==2){
+												action.find("#friend_sex").removeAttr("id style").html("女");
+											}else{
+												action.find("#friend_sex").removeAttr("id style").html("未知");
+											}
+											$("#friend-list").append(action);
+										}
+								},"json");
+							}// end for
+						}
+					},"json");
+				}
+			
+			getID();
+			
+			</script>

@@ -1,0 +1,47 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+            
+            
+       <!--个人信息显示bengin-->
+		
+			<h2 style="width:680px; height:40px; line-height:41px; background:#83bb4a url(images/reg-title-bg.png) repeat-x; 
+						color:#fefefe; text-indent:25px; font-size:20px; font-family:\9ED1\4F53; font-weight:400;">基本信息</h2>
+			<form id="form100" action="login.htm" method="post" class="reg-form" >
+				<p><label for="nickname"><em>*</em>性别：</label>
+                   <input id = "man" type="radio" name="optionsRadios"  value="1"><font style="font-size:14px; font-family: tahoma,arial">&nbsp;&nbsp;男</font>&nbsp;&nbsp;&nbsp;&nbsp;
+				   <input id = "woman" type="radio" name="optionsRadios" value="0"><font style="font-size:14px; font-family: tahoma,arial">&nbsp;&nbsp;女</font>
+                </p>
+                <p><label for="nickname"><em>*</em>用户名：</label>
+                    <input name="nickname" type="text"  class="input-txt" id="detail_nickname" autocomplete="off" size="43" />
+                </p>
+
+				<p><label for="birthday"><em>*</em>生日：</label>
+                   <input type="datetime"  id="detail_birthday" class="input-txt" autocomplete="off" size="43" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+                </p>
+				<p><label for="address"><em>*</em>所在地：</label>
+                   <input type="text"  class="input-txt" id="detail_address" autocomplete="off" size="43" />
+                </p>
+				<p><label for="qq"><em>*</em>QQ：</label>
+                   <input  type="text"  class="input-txt" id="detail_qq" autocomplete="off" size="43" />
+                </p>
+				<p><label for="tel"><em>*</em>电话号码：</label>
+                   <input type="text"  class="input-txt" id="detail_phone" autocomplete="off" size="43" />
+                </p>
+
+
+                    <p><label for="email"><em>*</em>邮箱：</label>
+                        <input name="email" type="text"  class="input-txt" id="detail_email" size="43">
+                    </p>
+				<p><label for="introduce"><em>*</em>个人简介：</label>
+                   <textarea rows="5" cols="60" id="detail_temp"  size="43" ></textarea>
+                </p><p></p>
+               	<a href="#" id = "detail_update" class="reg-login">修改</a>
+			</form>
+	<script type="text/javascript">
+		infomation_user();
+		
+		
+    </script>
+            <!--个人信息显示end-->
+

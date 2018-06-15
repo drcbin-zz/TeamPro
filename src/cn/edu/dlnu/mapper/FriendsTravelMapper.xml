@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.dlnu.daos.FriendsTravelMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.dlnu.models.FriendsTravel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="spot_id" property="spotId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="model_type" property="modelType" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="fromdate" property="fromdate" jdbcType="TIMESTAMP" />
+    <result column="todate" property="todate" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp" property="temp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, spot_id, status, model_type, title, fromdate, todate, content, create_time, 
+    temp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends_travel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from friends_travel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.dlnu.models.FriendsTravel" >
+    insert into friends_travel (id, user_id, spot_id, 
+      status, model_type, title, 
+      fromdate, todate, content, 
+      create_time, temp)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{spotId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{fromdate,jdbcType=TIMESTAMP}, #{todate,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{temp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.dlnu.models.FriendsTravel" >
+    insert into friends_travel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="spotId != null" >
+        spot_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modelType != null" >
+        model_type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="fromdate != null" >
+        fromdate,
+      </if>
+      <if test="todate != null" >
+        todate,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="temp != null" >
+        temp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="spotId != null" >
+        #{spotId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modelType != null" >
+        #{modelType,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdate != null" >
+        #{fromdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todate != null" >
+        #{todate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp != null" >
+        #{temp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.dlnu.models.FriendsTravel" >
+    update friends_travel
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="spotId != null" >
+        spot_id = #{spotId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdate != null" >
+        fromdate = #{fromdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todate != null" >
+        todate = #{todate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.dlnu.models.FriendsTravel" >
+    update friends_travel
+    set user_id = #{userId,jdbcType=INTEGER},
+      spot_id = #{spotId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      fromdate = #{fromdate,jdbcType=TIMESTAMP},
+      todate = #{todate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByAuthId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends_travel
+    where user_id = #{auth_id,jdbcType=INTEGER} and status=1 LIMIT #{start},#{end} 
+  </select>
+  
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends_travel
+    where status=1
+    LIMIT #{start},#{end}
+  </select>
+  
+   <update id="delete" parameterType="cn.edu.dlnu.models.FriendsTravel" >
+    update friends_travel
+    set user_id = #{userId,jdbcType=INTEGER},
+      spot_id = #{spotId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      fromdate = #{fromdate,jdbcType=TIMESTAMP},
+      todate = #{todate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      temp = #{temp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
